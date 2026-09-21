@@ -52,6 +52,7 @@
 | Whitelabel Error / `/actuator` | Spring Boot | 端点泄露 → env/heapdump |
 
 打法：指纹 → 定版本 → 翻**本地 payload 库**（赛前备好，断网）→ 直接打。识别不出 15 分钟撤。
+指纹这步不用肉眼：`tools/java_probe.py http://host/` 一轮只读探测直接出"像什么+下一步"（本地已对真假站验过判据）。
 
 ## 6. 开源项目魔改题：diff 法
 

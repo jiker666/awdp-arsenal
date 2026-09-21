@@ -26,14 +26,15 @@
 ## 目录
 
 ```
+CHEATSHEET.md   ★ 一页纸打印版（比赛进场就带它，细节再回各章节翻）
 01_开赛手册/   开赛 0-20 分钟 checklist、四小时时间线、分档取舍
 02_web防御/    真修复模板 × 语言、通防 × 语言、删 flag、不死马克制、打包格式
 03_pwn防御/    patch 速查表（整数溢出/栈溢出/格式化串/UAF）、机器码表、
                NOP free / dynsym 改名 / alarm 时间差 / eh_frame 通防、打包格式
 04_攻击套路/   命令注入/SSTI/原型污染 payload 骨架、Java 认得出五特征、
                开源项目 diff 法、sniper 自动化思路
-tools/         即用脚本：三语言通防、删flag、web/pwn 打包器、
-               pwn 通防链（evilPatcher 封装 + seccomp 沙箱预设）、sniper
+tools/         即用脚本：三语言通防、删flag、web/pwn 打包器、elf-patch 字节改刀、
+               交包 lint、java 探测/Filter、pwn 通防链（evilPatcher 封装 + seccomp 预设）
 ```
 
 ## 三条铁律（都是别人吃过亏的）

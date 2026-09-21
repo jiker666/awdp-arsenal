@@ -31,10 +31,11 @@ tar zcvf update.tar.gz update.sh pwn_fixed
 | 后门函数（win/backdoor 调 system） | NOP 掉后门（见 §3） | — |
 
 **How to patch（工具）**：
+- 命令行：`../tools/elf-patch.py` —— vaddr/偏移/原字节搜索三种定位 + `--expect` 原字节校验（防改错地方）+ hexdiff 改动计数（对照规则预算）。速查表里的 jle→jbe、NOP 后门全靠它落地
 - IDA：Edit → Patch program → Assemble（写汇编自动编码）→ **Apply patches to input file**（⚠️ 必须点这步才真正写文件；Free 版没有该菜单）
 - IDA + [Keypatch](https://github.com/keystone-engine/keypatch) 插件（推荐，汇编级 patch 神器）
-- 命令行：[AwdPwnPatcher](https://github.com/aftern00n/AwdPwnPatcher)（交互式）、[evilPatcher](https://github.com/TTY-flag/evilPatcher)（见 §5）
-- 纯脚本：`tools/pwn_patch.py`（nm 定位 + readelf 映射偏移 + 字节替换，本仓库实测流程）
+- 一键通防：[AwdPwnPatcher](https://github.com/aftern00n/AwdPwnPatcher)（交互式）、[evilPatcher](https://github.com/TTY-flag/evilPatcher)（见 §5 和 `../tools/pwn-package.sh`）
+- 后门 NOP 专用：`../tools/pwn_patch.py`（nm 定位 + readelf 映射偏移 + 字节替换）
 
 **通用坑：vaddr ≠ 文件偏移**。IDA/objdump 显示的是虚拟地址，改文件要换算：
 `偏移 = vaddr - PT_LOAD.vaddr + PT_LOAD.offset`（no-pie 程序通常就是 `vaddr - 0x400000`），`readelf -l` 可查。

@@ -85,7 +85,7 @@ cd /app && nohup node app.js > /dev/null 2>&1 &
 
 - 最优：**只换单个 jar/依赖**（如 fastjson 题换成无漏洞版本同名 jar，wso2 题换官方修复 jar）——diff 小、无重构
 - war 题：本地备好 Maven/Gradle 环境 + 各版本依赖，重新打包（这就是为什么赛前要备环境；Go/Java 不熟是多数队的失分点）
-- 兜底：加一个全局 Filter 做 RASP（`SecFilter`，见 [java_filter 模板](https://github.com/XDSEC/JavaSecFilters)）⚠️ 未实测
+- 兜底：加一个全局 Filter 做 RASP——模板在 `../tools/java/`（`@WebFilter` 注解免改 web.xml，⚠️ 未实测；不拦 JSON body 的局限写在模板头部）
 
 ### 3.5 打包提交格式
 

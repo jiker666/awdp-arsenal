@@ -11,10 +11,22 @@
 | `delete_flag.sh` | 删 flag / chmod 000，带备份与一键撤回 | bash delete_flag.sh [chmod\|rm] | bash delete_flag.sh undo |
 | `pwn_patch.py` | NOP 掉后门：1 字节 ret 或 5 字节 NOP，长度不变 | python3 pwn_patch.py demo demo_fixed [ret\|nop] | — |
 | `pwn-package.sh` | pwn 一键通防包：sandbox(evilPatcher)/nop/chmod 三模式 → update.tar.gz | ./pwn-package.sh sandbox pwn01 | — |
+| `elf-patch.py` | 通用 ELF 字节 patch：vaddr/偏移/特征搜索定位 + expect 校验 + hexdiff 计数 | python3 elf-patch.py pwn01 --vaddr 0x4012 --expect 0f8e --hex 0f86 | — |
+| `lint_package.sh` | 交包前 30 秒自检：tar 结构/语法/危险命令/缺文件 + 人工清单 | ./lint_package.sh update.tar.gz | — |
+| `java_probe.py` | Java 五特征只读探测（shiro/actuator/druid/manager/魔数），15 分钟赌一把用 | python3 java_probe.py http://host/ | 只读 |
 | `make_package.sh` | web 防御包打包器：修复文件 → update.tar.gz + 单文件 patch.sh 双格式 | ./make_package.sh /容器路径/file=本地file --restart '...' | — |
 | `get_evilpatcher.sh` | 赛前有网时拉 evilPatcher 到本目录（断网赛场直接用） | ./get_evilpatcher.sh | rm -rf evilPatcher |
 | `sniper.py` | 攻击侧自动化踩点+参数电池+自动拿flag（纯标准库单文件） | python3 sniper.py http://host/ | 只读探测 |
 | `sandboxs/` | seccomp 沙箱预设（挡shell / 挡shell+挡读文件 / 挡反弹），风险表见其 README | SBOX=02 ./pwn-package.sh sandbox pwn01 | — |
+| `java/` | Java 全局 Filter 模板（RASP-lite）+ war 编译/集成步骤 | 见 java/README.md | ⚠️ 未实测 |
+
+**测试状态**（诚实标注）：
+- `elf-patch.py`：`--selftest` 内置自验（ELF 头解析/vaddr 映射/唯一搜索/hexdiff 计数），已跑绿；
+  CLI 路径在合成 ELF 上验过（expect 拦截/多命中拒绝都正常）
+- `lint_package.sh` / `java_probe.py`：好包/坏包、真站/catch-all 站对拍验过
+- `waf-*.sh` / `delete_flag.sh` / `sniper.py` / `pwn_patch.py`：自训靶场全流程实测
+- `pwn-package.sh` / `make_package.sh`：sh -n 语法过，完整链路在赛场 Linux 首用时先拿一题练手
+- `java/`：未实测，模板性质
 
 **pwn 通防链路**（赛场机上跑，本仓库不内置 evilPatcher——原作者没挂 license，赛前自己拉）：
 
