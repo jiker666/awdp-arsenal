@@ -32,7 +32,8 @@
                NOP free / dynsym 改名 / alarm 时间差 / eh_frame 通防、打包格式
 04_攻击套路/   命令注入/SSTI/原型污染 payload 骨架、Java 认得出五特征、
                开源项目 diff 法、sniper 自动化思路
-tools/         即用脚本：三语言通防、删flag、patch 模板、pwn patch 脚本
+tools/         即用脚本：三语言通防、删flag、web/pwn 打包器、
+               pwn 通防链（evilPatcher 封装 + seccomp 沙箱预设）、sniper
 ```
 
 ## 三条铁律（都是别人吃过亏的）

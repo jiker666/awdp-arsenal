@@ -43,6 +43,7 @@
 
 - 各语言环境：PHP/Python/Node/Java/Golang 的 Docker 镜像提前 pull 好（赛场拉不动）
 - 离线 pip/npm/pear 包：flask、jinja2、express、ejs、fastjson 各版本
+- **pwn 通防链路**：`tools/get_evilpatcher.sh` 拉好 evilPatcher + `pip3 install pwntools` + `gem install seccomp-tools`（赛场机也要装这套）
 - 反编译：jd-gui/jadx、IDEA（Java）；IDA/Ghidra + keypatch 插件（pwn）
 - 脚本库：本仓库 tools/ 全部 + 第三方 WAF（awd-watchbird / CTF-WAF / AoiAWD）
 - payload 文档：本仓库 04_攻击套路 + fastjson/shiro/log4j 各版本本地 payload 库

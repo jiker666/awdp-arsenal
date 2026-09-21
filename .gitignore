@@ -1,0 +1,5 @@
+# get_evilpatcher.sh 拉下来的第三方（原作者无 license，不入库）
+tools/evilPatcher/
+# make_package.sh 产物
+dist/
+dist_*/

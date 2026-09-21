@@ -74,8 +74,13 @@ Hello CTF 实例：自定义 `read` 只允许读固定长度（堵 scanf %s）�
 
 ## 5. 通防 & 偏方（规则空白处才用）
 
+**一键出包**：`../tools/pwn-package.sh`（三模式 sandbox/nop/chmod → 直接产 update.tar.gz；
+沙箱预设与 SLA 风险表见 `../tools/sandboxs/README.md`；evilPatcher 赛前用
+`../tools/get_evilpatcher.sh` 拉好 + 装 pwntools/seccomp-tools）。
+
 | 招 | 做法 | 边界 |
 |---|---|---|
+| **evilPatcher 沙箱** | seccomp 挡 execve（或 +open/openat），改 <0x100 字节不动文件头，32/64 位 + PIE 通吃 | 挡 shell 最稳；挡 open 会连服务自己的文件 IO 一起杀（SLA 风险），fork 型服务禁挡 clone。详见 preset 风险表 |
 | **NOP free** | `free@plt` 入口 1 字节 `0xC3` | 堵 UAF/double-free/tcache/fastbin/unsorted/consolidation 全家；**堵不住** House of Force、不经过 free 的直接溢出。Hello CTF 评价：有时候管用，不是啥时候都管用 |
 | **dynsym 改名** | 把 dynsym 表里 `free` 的函数名字符串改成别的（如 `atoi`），链接器找不到 free → 调用变无害 | 依赖 ret2resolve 知识点；对静态链接无效 ⚠️ 未实测 |
 | **alarm 时间差** ⭐ | `alarm(60)` 改 `alarm(3)`：checker 只跑 1~5 秒必过 SLA，而攻击者的 exploit（IO 暴力/多轮交互）需要 >5 秒 → 卡死 | Hello CTF 实战记录的阴招：checker 过了、exp 没法打完。**只骗 check，不防住漏洞** |
