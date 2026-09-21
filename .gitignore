@@ -3,3 +3,6 @@ tools/evilPatcher/
 # make_package.sh 产物
 dist/
 dist_*/
+
+__pycache__/
+*.pyc
